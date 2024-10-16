@@ -1,0 +1,61 @@
+{% extends "link_tree/_base.html" %}
+
+
+
+
+{% block content %}
+<div class="sm:w-2/3 mx-auto px-10">
+
+    <h1 class="text-center text-4xl mb-2">All my Links</h1>
+    
+    <table class="border-solid border-3 border-black w-full">
+        <thead>
+            <tr class="border-solid border-2 border-black-500">
+                <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-t1">Name</th>
+                <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">URL</th>
+                <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Profile</th>
+                <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Edit</th>
+                <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Delete</th>
+            </tr>
+        </thead>
+        
+        {% for link in object_list %}
+        <tbody class="border-solid border-2 border-gray">
+            <tr class="border-solid border-2 border-gray">
+                <td class="px-4 py-3">{{link.name}}</td>
+                <td class="px-4 py-3">
+                    <a href="{{ link.url }}" target="_blank" class='underline'>
+                        {{ link.url }}
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-4M15 3l6 6m-6-6v6h6" />
+                        </svg>
+                    </a>
+                </td>
+                
+                <td class="px-4 py-3">
+                    <a href="{% url 'profile' link.profile.slug %}" target='_blank'>
+                        {{ link.profile.name }}
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-4M15 3l6 6m-6-6v6h6" />
+                        </svg>
+                    </a>
+                </td>
+                
+                <!-- <td class="px-4 py-3">{{ link.profile.name }} </td> -->
+                <td class="px-4 py-3 underline text-blue-600"><a href = "{% url 'link-update' link.id %}">Edit</a></td>
+                <td class="px-4 py-3 underline text-red  -600"><a href = "{% url 'link-delete' link.id %}">Delete</a></td>
+            </tr>
+            
+        </tbody>
+        {% endfor %}
+        
+        
+    </table>
+    <a href="{% url 'link-create' %}">
+    <p class="mt-6 py-2 w-full border rounded border-gray-400 justify text-center text-gray-700 hover:cursor-pointer hover:bg-green-300">Add New</p>
+    </a>
+</div>
+
+
+   
+    {% endblock %}

@@ -1,0 +1,35 @@
+{% extends "link_tree/_base.html" %}
+
+
+{% block content %}
+
+<div class="sm:w-2/3 mx-auto px-10">
+    <h1 class="text-center text-4xl mb-2">Profile Details</h1>
+    <table class="border-solid border-3 border-gray w-full text-center">
+        <thead>
+            <tr class="px-4 py-3 border-solid border-2 border-gray">
+                <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-t1">Name</th>
+                <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Slug</th>
+                <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Background Color</th>
+                <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Edit</th>
+            </tr>
+        </thead>
+        
+        {% for link in object_list %}
+        <tbody class="border:solid border-1 borger-gray">
+            <tr class="border:solid border-2 border-gray">
+                <td class="px-4 py-3">{{ link.name }}</td>
+                <td class="px-4 py-3">{{ link.slug }}</td>
+                <td class="px-4 py-3">{{ link.bg_color }}</td>
+                <td class="px-4 py-3 underline text-blue-600"><a href="">Edit</a></td>
+
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+    <a href="">
+        <p class="mt-2 py-2 w-full border rounded border-gray-400 text-center text-gray">Add New</p>
+    </a>
+</div>
+
+{% endblock %}
