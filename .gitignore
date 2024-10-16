@@ -1,3 +1,5 @@
 .env
 link_tree\templates\link_tree\profile_list.html
 link_tree\templates\link_tree\profile_form.html
+link_tree\migrations
+link_tree\__pycache__
