@@ -12,7 +12,7 @@ This project is **Dockerized** and runs on **port 7000**.
 
 * Consolidate all important links into one place
 * Share a single URL that points to all your profiles, blogs, and websites
-* Maintain a clean, mobile‑responsive landing page
+* Maintain a clean, mobile-responsive landing page
 
 Built with **Django** and **Tailwind CSS**, the application focuses on simplicity, scalability, and modern UI practices.
 
@@ -23,9 +23,10 @@ Built with **Django** and **Tailwind CSS**, the application focuses on simplicit
 * User authentication and profile management
 * Create, edit, delete, and reorder links
 * Clean and modern UI using Tailwind CSS
-* Class‑Based Views (CBVs) for maintainable Django code
-* Fully mobile‑responsive design
-* Docker‑based setup for easy deployment
+* Class-Based Views (CBVs) for maintainable Django code
+* Fully mobile-responsive design
+* Docker-based setup for easy deployment
+* CI/CD automation using Jenkins
 
 ---
 
@@ -33,10 +34,11 @@ Built with **Django** and **Tailwind CSS**, the application focuses on simplicit
 
 * **Django** – Backend framework
 * **Django Crispy Forms** – Improved form rendering
-* **Class‑Based Views (CBVs)** – Reusable and structured views
+* **Class-Based Views (CBVs)** – Reusable and structured views
 * **HTML5** – Markup
-* **Tailwind CSS** – Utility‑first styling
+* **Tailwind CSS** – Utility-first styling
 * **Docker & Docker Compose** – Containerized deployment
+* **Jenkins** – CI/CD automation
 
 ---
 
@@ -46,6 +48,7 @@ Make sure you have the following installed:
 
 * Docker
 * Docker Compose (v2 recommended)
+* Jenkins (for CI/CD pipeline)
 
 ---
 
@@ -54,8 +57,8 @@ Make sure you have the following installed:
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
+git clone https://github.com/akshatraj26/Link-Tree-Clone.git
+cd Link-Tree-Clone
 ```
 
 ### 2. Environment Variables
@@ -85,8 +88,6 @@ Database migrations are **automatically handled during container startup**, so n
 
 ### 5. Create superuser (optional)
 
-If you need admin access, you can still create a superuser manually:
-
 ```bash
 docker compose exec app python manage.py createsuperuser
 ```
@@ -99,6 +100,61 @@ Open your browser and visit:
 
 ```
 http://localhost:7000/
+```
+
+---
+
+## Jenkins CI/CD Integration
+
+This project supports **Jenkins-based CI/CD** to automate build, test, and deployment workflows.
+
+### Jenkins Pipeline Overview
+
+The Jenkins pipeline typically performs the following steps:
+
+1. Pull source code from GitHub
+2. Build Docker images
+3. Run containers using Docker Compose
+4. Apply database migrations automatically
+5. Restart services on successful build
+
+### Sample Jenkinsfile
+
+```groovy
+pipeline {
+    agent any
+
+    stages {
+        stage('Clone Repository') {
+            steps {
+                git branch: 'main', url: 'https://github.com/akshatraj26/Link-Tree-Clone.git'
+            }
+        }
+
+        stage('Build Docker Images') {
+            steps {
+                sh 'docker compose build'
+            }
+        }
+
+        stage('Run Containers') {
+            steps {
+                sh 'docker compose up -d'
+            }
+        }
+    }
+}
+```
+
+### Jenkins Requirements
+
+* Jenkins installed on the host machine
+* Docker and Docker Compose installed on the Jenkins server
+* Jenkins user added to the Docker group
+
+```bash
+sudo usermod -aG docker jenkins
+sudo systemctl restart jenkins
 ```
 
 ---
@@ -136,14 +192,16 @@ Contributions are welcome:
 1. Fork the repository
 2. Create a feature branch
 
-   ```bash
-   git checkout -b feature-branch
-   ```
+```bash
+git checkout -b feature-branch
+```
+
 3. Commit changes
 
-   ```bash
-   git commit -m "Add new feature"
-   ```
+```bash
+git commit -m "Add new feature"
+```
+
 4. Push and open a Pull Request
 
 ---
