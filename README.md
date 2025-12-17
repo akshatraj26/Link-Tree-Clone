@@ -121,29 +121,29 @@ The Jenkins pipeline typically performs the following steps:
 ### Sample Jenkinsfile
 
 ```groovy
+
 pipeline {
-    agent any
-
+    agent any 
+    
     stages {
-        stage('Clone Repository') {
-            steps {
-                git branch: 'main', url: 'https://github.com/akshatraj26/Link-Tree-Clone.git'
+        stage("Pull code from git hub") {
+            steps{
+                git url: "https://github.com/akshatraj26/Link-Tree-Clone.git", branch: "main"
             }
         }
-
-        stage('Build Docker Images') {
-            steps {
-                sh 'docker compose build'
+        stage("Build & Test your application"){
+            steps{
+                sh "docker build -t link-tree ."
             }
         }
-
-        stage('Run Containers') {
-            steps {
-                sh 'docker compose up -d'
+        stage("Deploy you application on jenkins"){
+            steps{
+                sh "docker compose up -d"
             }
         }
     }
 }
+
 ```
 
 ### Jenkins Requirements
